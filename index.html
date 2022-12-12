@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function myFunction(endPoint, method = "GET") {
+            switch (method) {
+                case "POST":
+                    switch (endPoint) {
+                        case "orders":
+                            fetch(`https://northwind.vercel.app/api/${endPoint}`, {
+                                headers: { 'Content-Type': 'application/json' },
+                                method: "POST",
+                                body: JSON.stringify({
+                                    "customerId": "SPLIR",
+                                    "employeeId": 6,
+                                    "orderDate": "1996-08-01 00:00:00.000",
+                                    "requiredDate": "1996-08-29 00:00:00.000",
+                                    "shippedDate": "1996-08-30 00:00:00.000",
+                                    "shipVia": 2,
+                                    "freight": 4.54,
+                                    "shipName": "Split Rail Beer & Ale",
+                                    "shipAddress": {
+                                        "street": "P.O. Box 555",
+                                        "city": "Lander",
+                                        "region": "WY",
+                                        "postalCode": 82520,
+                                        "country": "USA"
+                                    },
+                                    "details": [
+                                        {
+                                            "productId": 33,
+                                            "unitPrice": 2,
+                                            "quantity": 24,
+                                            "discount": 0
+                                        }]
+                                },)
+                            })
+                                .then(res => res.json())
+                                .then(data => console.log(data));
+                        case "suppliers":
+                            fetch(`https://northwind.vercel.app/api/${endPoint}`, {
+                                headers: { 'Content-Type': 'application/json' },
+                                method: "POST",
+                                body: JSON.stringify({
+                                    "companyName": "Tokyo Traders",
+                                    "contactName": "Yoshi Nagase",
+                                    "contactTitle": "Marketing Manager",
+                                    "address": {
+                                        "street": "9-8 Sekimai Musashino-shi",
+                                        "city": "Tokyo",
+                                        "region": "NULL",
+                                        "postalCode": 100,
+                                        "country": "Japan",
+                                        "phone": "(03) 3555-5011"
+                                    },
+                                    "details": [
+                                        {
+                                            "productId": 33,
+                                            "unitPrice": 2,
+                                            "quantity": 24,
+                                            "discount": 0
+                                        }]
+                                },)
+                            })
+                                .then(res => res.json())
+                                .then(data => console.log(data));
+                        default: return
+                    }
+                case "GET": fetch(`https://northwind.vercel.app/api/${endPoint}`)
+                    .then(res => res.json())
+                    .then(data => console.log(data));
+                default: return;
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
